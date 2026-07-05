@@ -53,15 +53,11 @@ body {
 }
 
 .home-module-grid {
-  @apply grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:items-stretch;
-}
-
-.home-module-grid-orphan {
-  @apply h-full lg:col-span-2 lg:max-w-md lg:justify-self-center;
+  @apply grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:items-stretch;
 }
 
 .home-topics-grid {
-  @apply mx-auto grid max-w-5xl grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7;
+  @apply mx-auto grid max-w-6xl grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-7;
 }
 
 .home-trust-card {

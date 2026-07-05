@@ -34,6 +34,7 @@ const MODULE_ICONS: Record<string, typeof BookOpen> = {
   "/community": MessageCircle,
   "/tools": Calculator,
   "/portals": ExternalLink,
+  "/faq": HelpCircle,
 };
 
 const WHY_ICONS = {
@@ -57,8 +58,6 @@ type HomeModule = {
 };
 
 export function HomeModulesGrid({ modules }: { modules: HomeModule[] }) {
-  const orphanLast = modules.length % 3 === 1;
-
   return (
     <section className="home-section">
       <FadeIn>
@@ -70,13 +69,8 @@ export function HomeModulesGrid({ modules }: { modules: HomeModule[] }) {
       <div className="home-module-grid mt-12">
         {modules.map((mod, i) => {
           const Icon = MODULE_ICONS[mod.href] ?? BookOpen;
-          const isOrphan = orphanLast && i === modules.length - 1;
           return (
-            <FadeIn
-              key={mod.href}
-              delay={i * 60}
-              className={isOrphan ? "home-module-grid-orphan" : "h-full"}
-            >
+            <FadeIn key={mod.href} delay={i * 60} className="h-full">
               <Link href={mod.href} className="home-card group flex h-full flex-col">
                 <div className={`module-icon ${mod.accent}`}>
                   <Icon className="h-5 w-5" strokeWidth={1.75} />

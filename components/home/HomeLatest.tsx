@@ -16,7 +16,15 @@ export async function HomeLatest() {
 
   return (
     <section className="home-section border-t border-navy-100/80 !py-14">
-      <h2 className="home-heading">Latest from OfficeMitra</h2>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <h2 className="home-heading">Latest from OfficeMitra</h2>
+        <Link
+          href="/knowledge"
+          className="inline-flex items-center gap-1 text-sm font-semibold text-gold-600 hover:text-gold-700"
+        >
+          Explore Knowledge Hub <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
 
       {latestUpdates.length > 0 && latestArticles.length > 0 ? (
         <div className="mt-8 grid gap-8 lg:grid-cols-2 lg:items-start">
@@ -86,12 +94,6 @@ export async function HomeLatest() {
         </div>
       )}
 
-      <Link
-        href="/knowledge"
-        className="mt-8 inline-flex items-center gap-1 text-sm font-semibold text-gold-600 hover:text-gold-700"
-      >
-        Explore Knowledge Hub <ArrowRight className="h-4 w-4" />
-      </Link>
     </section>
   );
 }

@@ -23,6 +23,15 @@ export default async function HomePage() {
     description,
     accent,
   }));
+  const homeModules = [
+    ...platformModules,
+    {
+      href: "/faq",
+      title: "FAQ",
+      description: "Quick answers to common questions on leave, pay, pension, bills, transfers, and service matters.",
+      accent: "bg-fuchsia-50 text-fuchsia-700",
+    },
+  ];
   const homeStats = getHomeStats(stats);
 
   return (
@@ -31,7 +40,7 @@ export default async function HomePage() {
       <HomeHero />
       <HomeStats stats={homeStats} />
       <HomeLatest />
-      <HomeModulesGrid modules={platformModules} />
+      <HomeModulesGrid modules={homeModules} />
       <HomePopularTopics />
       <HomeWhyOfficeMitra />
       <HomeMoreHelp />
