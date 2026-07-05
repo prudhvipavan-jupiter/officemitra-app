@@ -6,7 +6,6 @@ import {
   HomeModulesGrid,
   HomeMoreHelp,
   HomePopularTopics,
-  HomeTestimonials,
   HomeTrust,
   HomeWhyOfficeMitra,
 } from "@/components/home/HomeSections";
@@ -37,7 +36,6 @@ export default async function HomePage() {
       <HomeWhyOfficeMitra />
       <HomeMoreHelp />
       <HomeTrust />
-      <HomeTestimonials />
       <HomeExpertBanner />
     </>
   );

@@ -183,7 +183,7 @@ export const tools: ToolDefinition[] = [
     goNote: AP_GO.gpf.interestNote,
     inputs: [
       { key: "balance", label: "GPF balance (₹)", type: "number" },
-      { key: "interestRate", label: "Notified interest rate (%)", type: "number", placeholder: "7.7" },
+      { key: "interestRate", label: "Notified interest rate (%) from GO", type: "number" },
     ],
   },
   {

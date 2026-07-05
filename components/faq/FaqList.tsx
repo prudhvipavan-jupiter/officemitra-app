@@ -1,13 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { HelpCircle, Search } from "lucide-react";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { VerifiedBadge } from "@/components/ui/VerifiedBadge";
 import { FAQ_CATEGORY_LABELS } from "@/lib/site-data";
+import { contentPublicHref } from "@/lib/cms/public-href";
 
 type FaqItem = {
   id: string;
+  slug?: string | null;
   title: string;
   body: string | null;
   category: string;
@@ -76,16 +79,27 @@ export function FaqList({ items }: { items: FaqItem[] }) {
         </div>
       ) : (
         <dl className="mt-8 space-y-3">
-          {filtered.map((item) => (
+          {filtered.map((item) => {
+            const href = contentPublicHref({
+              content_type: "faq",
+              slug: item.slug ?? null,
+              title: item.title,
+            });
+            return (
             <div key={item.id} className="card">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="badge bg-navy-50 text-navy-700">{FAQ_CATEGORY_LABELS[item.category] ?? item.category}</span>
                 {Boolean(item.data?.verified) && <VerifiedBadge />}
               </div>
-              <dt className="mt-2 font-semibold text-navy-900">{item.title}</dt>
+              <dt className="mt-2 font-semibold text-navy-900">
+                <Link href={href} className="hover:text-gold-600">
+                  {item.title}
+                </Link>
+              </dt>
               <dd className="mt-2 leading-relaxed text-gray-700">{item.body}</dd>
             </div>
-          ))}
+            );
+          })}
         </dl>
       )}
     </>

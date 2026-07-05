@@ -117,15 +117,6 @@ export const HOME_EXPERT_BANNER = {
   secondaryCta: { href: "/community", label: "Ask the Community" },
 } as const;
 
-export const HOME_TESTIMONIALS = {
-  title: "Trusted by Government Staff",
-  items: [
-    { quote: "The pension proposal checklist saved hours of work.", role: "Establishment Section" },
-    { quote: "Best place to understand Government Orders in simple language.", role: "Ministerial Staff" },
-    { quote: "The calculators are accurate and easy to use.", role: "DDO Office" },
-  ],
-} as const;
-
 export const FOOTER_DESCRIPTION =
   "OfficeMitra is a professional knowledge platform built for AP Government ministerial staff. Access Government Orders, practical articles, calculators, procedural guides, official portals, templates, and expert assistance—all in one place.";
 
@@ -135,14 +126,13 @@ export function getHomeStats(live: {
   portals: number;
   faq: number;
 }) {
-  const fmt = (n: number) => (n >= 10 ? `${n}+` : String(n));
   return [
     {
       value: live.articles,
-      suffix: live.articles >= 10 ? "+" : "",
+      suffix: "",
       label: "Knowledge Articles",
       href: "/knowledge",
-      display: fmt(live.articles),
+      display: String(live.articles),
     },
     {
       value: live.tools,
@@ -153,17 +143,17 @@ export function getHomeStats(live: {
     },
     {
       value: live.portals,
-      suffix: live.portals >= 10 ? "+" : "",
+      suffix: "",
       label: "Official Portals",
       href: "/portals",
-      display: fmt(live.portals),
+      display: String(live.portals),
     },
     {
       value: live.faq,
-      suffix: live.faq >= 10 ? "+" : "",
+      suffix: "",
       label: "FAQs",
       href: "/faq",
-      display: fmt(live.faq),
+      display: String(live.faq),
     },
   ];
 }

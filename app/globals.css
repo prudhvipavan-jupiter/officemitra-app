@@ -60,10 +60,6 @@ body {
   @apply shadow-lg;
 }
 
-.home-testimonial {
-  @apply rounded-2xl border border-navy-700 bg-navy-800/80 p-6;
-}
-
 .home-fade-in {
   @apply translate-y-4 opacity-0 transition duration-700 ease-out;
 }

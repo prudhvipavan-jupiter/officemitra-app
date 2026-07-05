@@ -39,10 +39,15 @@ export async function getBySlug(type: ContentType, slug: string) {
   if (!isDatabaseEnabled()) return null;
   await ensureSchema();
   const db = getSql();
-  const rows = await db`
-    SELECT * FROM cms_content WHERE content_type = ${type} AND slug = ${slug} AND status = 'published' LIMIT 1
-  `;
-  return rows[0] ? row(rows[0] as Record<string, unknown>) : null;
+  const decoded = decodeURIComponent(slug);
+  const candidates = [...new Set([slug, decoded, slugify(decoded), slugify(slug)])].filter(Boolean);
+  for (const candidate of candidates) {
+    const rows = await db`
+      SELECT * FROM cms_content WHERE content_type = ${type} AND slug = ${candidate} AND status = 'published' LIMIT 1
+    `;
+    if (rows[0]) return row(rows[0] as Record<string, unknown>);
+  }
+  return null;
 }
 
 export async function getById(id: string) {

@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 import { listContent } from "@/lib/cms/store";
+import { contentPublicHref } from "@/lib/cms/public-href";
 import { tools } from "@/lib/data/tools";
 import { SITE_URL } from "@/lib/site-config";
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const staticRoutes = [
@@ -39,13 +39,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let articleEntries: MetadataRoute.Sitemap = [];
   let updateEntries: MetadataRoute.Sitemap = [];
+  let faqEntries: MetadataRoute.Sitemap = [];
 
   try {
-    const [articles, updates] = await Promise.all([listContent("article", true), listContent("update", true)]);
+    const [articles, updates, faqs] = await Promise.all([
+      listContent("article", true),
+      listContent("update", true),
+      listContent("faq", true),
+    ]);
     articleEntries = articles
       .filter((a) => a.slug)
       .map((a) => ({
-        url: `${SITE_URL}/knowledge/${a.slug}`,
+        url: `${SITE_URL}${contentPublicHref(a)}`,
         lastModified: a.updated_at ? new Date(a.updated_at) : now,
         changeFrequency: "monthly" as const,
         priority: 0.6,
@@ -53,14 +58,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     updateEntries = updates
       .filter((u) => u.slug)
       .map((u) => ({
-        url: `${SITE_URL}/updates/${u.slug}`,
+        url: `${SITE_URL}${contentPublicHref(u)}`,
         lastModified: u.updated_at ? new Date(u.updated_at) : now,
         changeFrequency: "weekly" as const,
         priority: 0.7,
       }));
+    faqEntries = faqs.map((f) => ({
+      url: `${SITE_URL}${contentPublicHref(f)}`,
+      lastModified: f.updated_at ? new Date(f.updated_at) : now,
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    }));
   } catch {
     // Static + tool routes still published if CMS DB is temporarily unavailable
   }
 
-  return [...staticEntries, ...toolEntries, ...articleEntries, ...updateEntries];
+  return [...staticEntries, ...toolEntries, ...articleEntries, ...updateEntries, ...faqEntries];
 }

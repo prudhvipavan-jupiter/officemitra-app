@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Seed Knowledge Hub articles and Document Library references (idempotent).
+ * Seed Knowledge Hub articles (idempotent).
  * Usage: node scripts/seed-content.mjs
  */
 import fs from "fs";
@@ -12,7 +12,6 @@ import { neon } from "@neondatabase/serverless";
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
 const { articles } = require(path.join(root, "lib/data/seed-articles.cjs"));
-const { documents } = require(path.join(root, "lib/data/seed-documents.cjs"));
 
 function loadEnv(p) {
   if (!fs.existsSync(p)) return {};
@@ -70,25 +69,4 @@ for (const art of articles) {
   `;
 }
 
-for (const doc of documents) {
-  const slug = slugify(doc.title);
-  const data = JSON.stringify({ external_url: doc.external_url ?? null });
-  await sql`
-    INSERT INTO cms_content (id, content_type, slug, status, title, summary, category, body, data, created_at, updated_at)
-    VALUES (
-      ${doc.id}, 'document', ${slug}, 'published',
-      ${doc.title}, ${doc.summary}, ${doc.category}, ${doc.body}, ${data}::jsonb, ${now}, ${now}
-    )
-    ON CONFLICT (id) DO UPDATE SET
-      slug = EXCLUDED.slug,
-      status = EXCLUDED.status,
-      title = EXCLUDED.title,
-      summary = EXCLUDED.summary,
-      category = EXCLUDED.category,
-      body = EXCLUDED.body,
-      data = EXCLUDED.data,
-      updated_at = EXCLUDED.updated_at
-  `;
-}
-
-console.log(`Seeded ${articles.length} articles and ${documents.length} documents.`);
+console.log(`Seeded ${articles.length} articles.`);

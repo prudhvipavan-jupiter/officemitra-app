@@ -21,7 +21,6 @@ import {
   HOME_HELP_SECTION,
   HOME_MODULES_SECTION,
   HOME_POPULAR_TOPICS,
-  HOME_TESTIMONIALS,
   HOME_TRUST,
   HOME_WHY_OM,
 } from "@/lib/data/homepage";
@@ -182,28 +181,6 @@ export function HomeTrust() {
           </ul>
         </div>
       </FadeIn>
-    </section>
-  );
-}
-
-export function HomeTestimonials() {
-  return (
-    <section className="home-section bg-navy-900 px-4 py-16 text-white md:py-20">
-      <FadeIn>
-        <h2 className="text-center text-2xl font-bold tracking-tight text-white md:text-3xl">
-          {HOME_TESTIMONIALS.title}
-        </h2>
-      </FadeIn>
-      <div className="mx-auto mt-10 grid max-w-5xl gap-5 md:grid-cols-3">
-        {HOME_TESTIMONIALS.items.map((t, i) => (
-          <FadeIn key={t.quote} delay={i * 90}>
-            <blockquote className="home-testimonial h-full">
-              <p className="text-[0.9375rem] leading-relaxed text-navy-100">&ldquo;{t.quote}&rdquo;</p>
-              <footer className="mt-4 text-xs font-medium uppercase tracking-wide text-gold-400">{t.role}</footer>
-            </blockquote>
-          </FadeIn>
-        ))}
-      </div>
     </section>
   );
 }

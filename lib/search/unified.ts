@@ -1,8 +1,7 @@
 import { searchContent } from "@/lib/cms/store";
+import { contentPublicHref } from "@/lib/cms/public-href";
 import { portalLinks } from "@/lib/data/portals";
 import { tools } from "@/lib/data/tools";
-import { PUBLIC_PATH } from "@/lib/cms/types";
-
 export type SearchResult = {
   title: string;
   summary: string;
@@ -22,7 +21,7 @@ export async function searchAll(query: string): Promise<SearchResult[]> {
     results.push({
       title: item.title,
       summary: item.summary,
-      href: `${PUBLIC_PATH[item.content_type]}/${item.slug}`,
+      href: contentPublicHref(item),
       type: item.content_type,
       typeLabel: item.content_type === "faq" ? "FAQ" : item.content_type.charAt(0).toUpperCase() + item.content_type.slice(1),
     });
