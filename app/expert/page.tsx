@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MessageCircle, Shield } from "lucide-react";
+import { ContactForm } from "@/components/ContactForm";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { DisclaimerNotice } from "@/components/ui/DisclaimerNotice";
 
@@ -47,9 +48,11 @@ export default function ExpertPage() {
           </p>
         </div>
 
+        <ContactForm defaultType="expert" showTypeSelect={false} />
+
         <div className="flex flex-wrap gap-3">
-          <Link href="/contact" className="btn-primary">
-            Contact OfficeMitra
+          <Link href="/contact" className="btn-secondary">
+            General contact
           </Link>
           <Link href="/community" className="btn-secondary">
             <MessageCircle className="h-4 w-4" />

@@ -56,4 +56,27 @@ export async function ensureSchema() {
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
   `;
+  await db`
+    CREATE TABLE IF NOT EXISTS site_files (
+      id TEXT PRIMARY KEY,
+      kind TEXT NOT NULL DEFAULT 'logo',
+      filename TEXT NOT NULL,
+      mime_type TEXT NOT NULL,
+      data BYTEA NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `;
+  await db`
+    CREATE TABLE IF NOT EXISTS contact_requests (
+      id TEXT PRIMARY KEY,
+      name TEXT NOT NULL,
+      email TEXT NOT NULL,
+      department TEXT NOT NULL DEFAULT '',
+      subject TEXT NOT NULL,
+      message TEXT NOT NULL,
+      request_type TEXT NOT NULL DEFAULT 'general',
+      status TEXT NOT NULL DEFAULT 'new',
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `;
 }

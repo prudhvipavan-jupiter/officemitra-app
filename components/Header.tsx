@@ -15,7 +15,7 @@ const nav = [
   { href: "/portals", label: "Portals" },
 ];
 
-export function Header() {
+export function Header({ logoUrl }: { logoUrl?: string | null }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   if (pathname.startsWith("/admin")) return null;
@@ -24,9 +24,13 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-navy-800/80 bg-navy-900 text-white shadow-lg">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2.5 font-bold tracking-tight">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gold-600 text-sm font-extrabold text-white shadow-sm">
-            OM
-          </span>
+          {logoUrl ? (
+            <img src={logoUrl} alt="OfficeMitra" className="h-9 w-auto max-w-[160px] object-contain" />
+          ) : (
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gold-600 text-sm font-extrabold text-white shadow-sm">
+              OM
+            </span>
+          )}
           <span className="hidden sm:inline">OfficeMitra</span>
         </Link>
         <nav className="hidden items-center gap-0.5 lg:flex">

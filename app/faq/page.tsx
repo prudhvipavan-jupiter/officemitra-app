@@ -1,6 +1,7 @@
 import { PageHeader } from "@/components/ui/PageHeader";
 import { DisclaimerNotice } from "@/components/ui/DisclaimerNotice";
 import { FaqList } from "@/components/faq/FaqList";
+import { FaqJsonLd } from "@/components/seo/FaqJsonLd";
 import { listContent } from "@/lib/cms/store";
 
 export const dynamic = "force-dynamic";
@@ -10,6 +11,7 @@ export default async function FaqPage() {
 
   return (
     <>
+      <FaqJsonLd items={items} />
       <div className="page-header">
         <div className="page-header-inner max-w-4xl">
           <PageHeader

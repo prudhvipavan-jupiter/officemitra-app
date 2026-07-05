@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { FileText } from "lucide-react";
 import type { ToolDefinition } from "@/lib/data/types";
+import { GO_LAST_VERIFIED } from "@/lib/site-config";
 import { calculators } from "@/lib/tool-engine";
 
 function CalculatorTool({ tool }: { tool: ToolDefinition }) {
@@ -67,6 +68,7 @@ export function ToolRenderer({ tool }: { tool: ToolDefinition }) {
           <p className="font-semibold text-navy-900">AP Government Order basis</p>
           <p className="mt-1">{tool.goReference}</p>
           {tool.goNote && <p className="mt-1 text-gray-600">{tool.goNote}</p>}
+          <p className="mt-2 text-xs text-gray-500">Rates last verified: {GO_LAST_VERIFIED}. Confirm on GOIR before action.</p>
         </div>
       </div>
       <CalculatorTool tool={tool} />

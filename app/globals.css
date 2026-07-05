@@ -120,3 +120,8 @@ body {
 .prose-article a {
   @apply font-medium text-navy-700 underline decoration-navy-200 underline-offset-2 hover:text-gold-600;
 }
+
+.sr-only {
+  @apply absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0;
+  clip: rect(0, 0, 0, 0);
+}
