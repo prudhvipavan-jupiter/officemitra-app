@@ -40,7 +40,7 @@ export default function AboutPage() {
           <li><strong>Documents</strong> — GOs, circulars, and reference files</li>
           <li><strong>Updates</strong> — what changed and what action is required</li>
           <li><strong>Staff Community</strong> — moderated Q&amp;A from peers</li>
-          <li><strong>Office Tools</strong> — calculators and checklists</li>
+          <li><strong>Office Calculators</strong> — AP GO–based pay, leave, APGLI, and pension tools</li>
           <li><strong>Expert Assistance</strong> — guidance from experienced practitioners</li>
         </ul>
       </div>

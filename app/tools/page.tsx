@@ -21,9 +21,9 @@ export default function ToolsPage() {
       <div className="page-header">
         <div className="page-header-inner">
           <PageHeader
-            breadcrumb={[{ label: "Home", href: "/" }, { label: "Office Tools" }]}
-            title="Office Tools"
-            description={`${tools.length} free calculators, checklists, and estimators for AP government staff — including income tax. Estimates only.`}
+            breadcrumb={[{ label: "Home", href: "/" }, { label: "Calculators" }]}
+            title="Office Calculators"
+            description={`${tools.length} calculators based on Andhra Pradesh Government Orders — verify current GO on GOIR before pay action.`}
           />
         </div>
       </div>
@@ -66,6 +66,7 @@ export default function ToolsPage() {
               </div>
               <h2 className="mt-4 font-semibold text-navy-900">{t.title}</h2>
               <p className="mt-1.5 text-sm leading-relaxed text-gray-600">{t.description}</p>
+              <p className="mt-2 text-xs text-gray-500 line-clamp-2">GO: {t.goReference}</p>
             </Link>
           ))}
         </div>

@@ -31,7 +31,7 @@ export default function ToolPage({ params }: { params: Promise<{ slug: string }>
         </div>
         <DisclaimerNotice compact />
         <p className="mt-4 text-xs text-gray-500">
-          Estimates only — verify with current rules, GOs, and your DDO. Not tax or legal advice.
+          Verify result against current GO on GOIR and your DDO before any pay action.
         </p>
         <Link href="/tools" className="mt-6 inline-block text-sm font-medium text-navy-700 hover:text-gold-600">
           ← All tools

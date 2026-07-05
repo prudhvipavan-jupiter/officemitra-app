@@ -15,42 +15,26 @@ export interface PortalLink {
   category: PortalCategory;
 }
 
-export type ToolCategory =
-  | "checklist"
-  | "leave"
-  | "finance"
-  | "establishment"
-  | "tax"
-  | "pension"
-  | "general";
+export type ToolCategory = "leave" | "finance" | "establishment" | "pension" | "apgli" | "gpf";
 
 export type ToolInput = {
   key: string;
   label: string;
-  type?: "number" | "date" | "text" | "select";
+  type?: "number" | "date" | "text" | "select" | "month";
   placeholder?: string;
   options?: { value: string; label: string }[];
 };
 
-export type ToolDefinition =
-  | {
-      slug: string;
-      title: string;
-      description: string;
-      category: ToolCategory;
-      kind: "checklist";
-      items: string[];
-    }
-  | {
-      slug: string;
-      title: string;
-      description: string;
-      category: ToolCategory;
-      kind: "calculator";
-      calculatorId: string;
-      inputs: ToolInput[];
-      hint?: string;
-    };
+export type ToolDefinition = {
+  slug: string;
+  title: string;
+  description: string;
+  category: ToolCategory;
+  calculatorId: string;
+  inputs: ToolInput[];
+  goReference: string;
+  goNote?: string;
+};
 
 export interface FaqEntry {
   id: string;
@@ -82,13 +66,12 @@ export const PORTAL_CATEGORY_COLORS: Record<PortalCategory, string> = {
 };
 
 export const TOOL_CATEGORY_LABELS: Record<ToolCategory, string> = {
-  checklist: "Checklists",
   leave: "Leave",
   finance: "Pay & Allowances",
   establishment: "Establishment",
-  tax: "Income Tax",
   pension: "Pension & Gratuity",
-  general: "General",
+  apgli: "APGLI",
+  gpf: "GPF / NPS",
 };
 
 export const FAQ_CATEGORY_LABELS: Record<string, string> = {

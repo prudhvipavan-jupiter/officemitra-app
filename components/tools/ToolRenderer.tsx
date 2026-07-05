@@ -1,47 +1,18 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { FileText } from "lucide-react";
 import type { ToolDefinition } from "@/lib/data/types";
 import { calculators } from "@/lib/tool-engine";
 
-function ChecklistTool({ items }: { items: string[] }) {
-  const [checked, setChecked] = useState<Record<number, boolean>>({});
-  const done = Object.values(checked).filter(Boolean).length;
-  return (
-    <div>
-      <p className="mb-4 text-sm text-gray-600">
-        Progress: {done} of {items.length} completed
-      </p>
-      <ul className="space-y-3">
-        {items.map((item, i) => (
-          <li key={item}>
-            <label className="flex cursor-pointer items-center gap-3 rounded-lg border border-navy-100 px-4 py-3 hover:bg-navy-50">
-              <input
-                type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-gold-600"
-                checked={!!checked[i]}
-                onChange={() => setChecked({ ...checked, [i]: !checked[i] })}
-              />
-              <span className={checked[i] ? "text-gray-500 line-through" : ""}>{item}</span>
-            </label>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function CalculatorTool({ tool }: { tool: Extract<ToolDefinition, { kind: "calculator" }> }) {
+function CalculatorTool({ tool }: { tool: ToolDefinition }) {
   const [values, setValues] = useState<Record<string, string>>({});
 
   const results = useMemo(() => {
     const calc = calculators[tool.calculatorId];
     if (!calc) return null;
-    const hasRequired = tool.inputs.some((inp) => {
-      if (inp.type === "select") return values[inp.key];
-      return values[inp.key]?.trim();
-    });
-    if (!hasRequired) return null;
+    const hasInput = tool.inputs.some((inp) => values[inp.key]?.trim());
+    if (!hasInput) return null;
     return calc(values);
   }, [tool, values]);
 
@@ -65,7 +36,7 @@ function CalculatorTool({ tool }: { tool: Extract<ToolDefinition, { kind: "calcu
             </select>
           ) : (
             <input
-              type={inp.type === "date" ? "date" : inp.type === "number" ? "number" : "text"}
+              type={inp.type === "date" ? "date" : inp.type === "month" ? "month" : "number"}
               className="input-field mt-1"
               placeholder={inp.placeholder}
               value={values[inp.key] ?? ""}
@@ -74,7 +45,6 @@ function CalculatorTool({ tool }: { tool: Extract<ToolDefinition, { kind: "calcu
           )}
         </div>
       ))}
-      {tool.hint && <p className="text-xs text-gray-500">{tool.hint}</p>}
       {results && (
         <div className="space-y-2 rounded-xl bg-navy-50 px-4 py-3 text-sm">
           {results.map((r) => (
@@ -89,6 +59,17 @@ function CalculatorTool({ tool }: { tool: Extract<ToolDefinition, { kind: "calcu
 }
 
 export function ToolRenderer({ tool }: { tool: ToolDefinition }) {
-  if (tool.kind === "checklist") return <ChecklistTool items={tool.items} />;
-  return <CalculatorTool tool={tool} />;
+  return (
+    <>
+      <div className="mb-6 flex gap-3 rounded-xl border border-gold-200 bg-gold-50 px-4 py-3 text-sm text-gray-800">
+        <FileText className="mt-0.5 h-4 w-4 shrink-0 text-gold-700" />
+        <div>
+          <p className="font-semibold text-navy-900">AP Government Order basis</p>
+          <p className="mt-1">{tool.goReference}</p>
+          {tool.goNote && <p className="mt-1 text-gray-600">{tool.goNote}</p>}
+        </div>
+      </div>
+      <CalculatorTool tool={tool} />
+    </>
+  );
 }

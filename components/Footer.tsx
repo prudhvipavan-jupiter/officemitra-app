@@ -25,7 +25,7 @@ export function Footer() {
               <li><Link href="/documents" className="text-navy-200 hover:text-white">Documents</Link></li>
               <li><Link href="/updates" className="text-navy-200 hover:text-white">Updates</Link></li>
               <li><Link href="/community" className="text-navy-200 hover:text-white">Staff Community</Link></li>
-              <li><Link href="/tools" className="text-navy-200 hover:text-white">Office Tools</Link></li>
+              <li><Link href="/tools" className="text-navy-200 hover:text-white">Calculators</Link></li>
               <li><Link href="/portals" className="text-navy-200 hover:text-white">Official Portals</Link></li>
             </ul>
           </div>

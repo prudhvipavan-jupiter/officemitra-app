@@ -49,8 +49,8 @@ export const platformModules: PlatformModule[] = [
   },
   {
     href: "/tools",
-    title: "Office Tools",
-    description: "60+ calculators, checklists, and income tax tools for daily work",
+    title: "Office Calculators",
+    description: "AP Government Order–based calculators for pay, leave, APGLI, GPF, and pension",
     icon: Calculator,
     accent: "bg-rose-50 text-rose-700",
   },
