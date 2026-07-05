@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.theofficemitra.com" }],
+      "destination": "https://theofficemitra.com/:path*",
+      "permanent": true
+    }
+  ]
+}

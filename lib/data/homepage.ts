@@ -135,30 +135,35 @@ export function getHomeStats(live: {
   portals: number;
   faq: number;
 }) {
+  const fmt = (n: number) => (n >= 10 ? `${n}+` : String(n));
   return [
     {
-      value: Math.max(live.articles, 105),
-      suffix: "+",
+      value: live.articles,
+      suffix: live.articles >= 10 ? "+" : "",
       label: "Knowledge Articles",
       href: "/knowledge",
+      display: fmt(live.articles),
     },
     {
       value: live.tools,
       suffix: "",
       label: "Government Calculators",
       href: "/tools",
+      display: String(live.tools),
     },
     {
       value: live.portals,
-      suffix: "+",
+      suffix: live.portals >= 10 ? "+" : "",
       label: "Official Portals",
       href: "/portals",
+      display: fmt(live.portals),
     },
     {
-      value: Math.max(live.faq, 500),
-      suffix: "+",
+      value: live.faq,
+      suffix: live.faq >= 10 ? "+" : "",
       label: "FAQs",
       href: "/faq",
+      display: fmt(live.faq),
     },
   ];
 }

@@ -30,12 +30,14 @@ function StatCard({
   label,
   href,
   delay,
+  display,
 }: {
   value: number;
   suffix: string;
   label: string;
   href: string;
   delay: number;
+  display?: string;
 }) {
   const ref = useRef<HTMLAnchorElement>(null);
   const [active, setActive] = useState(false);
@@ -65,8 +67,7 @@ function StatCard({
       style={{ transitionDelay: `${delay}ms` }}
     >
       <p className="text-3xl font-bold tracking-tight text-navy-900 md:text-4xl">
-        {count}
-        {suffix}
+        {active ? (display ?? `${count}${suffix}`) : "0"}
       </p>
       <p className="mt-2 text-sm font-medium text-gray-600 group-hover:text-navy-800">{label}</p>
     </Link>
@@ -76,7 +77,7 @@ function StatCard({
 export function HomeStats({
   stats,
 }: {
-  stats: { value: number; suffix: string; label: string; href: string }[];
+  stats: { value: number; suffix: string; label: string; href: string; display?: string }[];
 }) {
   return (
     <section className="border-b border-navy-100/80 bg-gradient-to-b from-white to-navy-50/50 px-4 py-12 md:py-16">

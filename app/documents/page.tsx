@@ -51,6 +51,16 @@ export default async function DocumentsPage() {
                     <Download className="h-4 w-4" />
                     Download
                   </a>
+                ) : d.data.external_url ? (
+                  <a
+                    href={String(d.data.external_url)}
+                    className="btn-secondary shrink-0 text-sm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Download className="h-4 w-4" />
+                    View on GOIR
+                  </a>
                 ) : null}
               </li>
             ))}
