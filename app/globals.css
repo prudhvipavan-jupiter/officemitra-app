@@ -1,26 +1,54 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-navy-900: #0a1628;
+  --color-navy-800: #1b2a4a;
+  --color-navy-700: #2c3e6b;
+  --color-navy-100: #e8ecf4;
+  --color-navy-50: #f4f6fa;
+  --color-gold-600: #b8860b;
+  --color-gold-500: #d4a017;
+  --color-gold-300: #e6c86a;
+  --color-gold-100: #fbf5e6;
+  --font-sans: var(--font-inter);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-white text-gray-900 antialiased;
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #0a1628 0%, #1b2a4a 55%, #2c3e6b 100%);
+}
+
+.input-field {
+  @apply w-full rounded-lg border border-navy-100 px-3 py-2 text-sm outline-none focus:border-navy-700 focus:ring-2 focus:ring-navy-100;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-lg bg-gold-600 px-4 py-2 text-sm font-semibold text-white hover:bg-gold-500;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-lg border border-navy-700 px-4 py-2 text-sm font-semibold text-navy-800 hover:bg-navy-50;
+}
+
+.card {
+  @apply rounded-2xl border border-navy-100 bg-white p-6 shadow-sm transition hover:border-gold-300 hover:shadow-md;
+}
+
+.prose-article {
+  @apply max-w-none leading-relaxed text-gray-800;
+}
+
+.prose-article h2 {
+  @apply mt-8 mb-3 text-xl font-bold text-navy-900;
+}
+
+.prose-article p {
+  @apply mb-4;
+}
+
+.prose-article ul {
+  @apply mb-4 list-disc pl-6;
 }
