@@ -50,14 +50,14 @@ export const platformModules: PlatformModule[] = [
   {
     href: "/tools",
     title: "Office Tools",
-    description: "Five free calculators and checklists for daily AP government work",
+    description: "60+ calculators, checklists, and income tax tools for daily work",
     icon: Calculator,
     accent: "bg-rose-50 text-rose-700",
   },
   {
     href: "/portals",
     title: "Official Portals",
-    description: "Curated links to CFMS, HRMS, APGLI, GOIR, and other AP systems",
+    description: "Curated links to CFMS, HRMS, incometax.gov.in, and 50+ official portals",
     icon: ExternalLink,
     accent: "bg-cyan-50 text-cyan-700",
   },

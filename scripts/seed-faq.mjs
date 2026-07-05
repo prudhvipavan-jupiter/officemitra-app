@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 /**
- * Seed a small set of useful FAQ entries (idempotent — safe to re-run).
+ * Seed 105 FAQ entries (idempotent — safe to re-run).
  */
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { createRequire } from "module";
 import { neon } from "@neondatabase/serverless";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
+const require = createRequire(import.meta.url);
+const { faqEntries } = require(path.join(root, "lib/data/faq-entries.cjs"));
 
 function loadEnv(p) {
   if (!fs.existsSync(p)) return {};
@@ -34,45 +37,6 @@ function slugify(text) {
     .slice(0, 80);
 }
 
-const faqs = [
-  {
-    id: "faq-001-official",
-    category: "general",
-    title: "Is OfficeMitra an official government website?",
-    body: "No. OfficeMitra is an independent administrative knowledge platform. It is not affiliated with the Government of Andhra Pradesh or any department. Content here is for guidance only — always verify with current Government Orders and your controlling officer.",
-  },
-  {
-    id: "faq-002-gos",
-    category: "general",
-    title: "Where can I search Andhra Pradesh Government Orders?",
-    body: "Use the GOIR portal (goir.ap.gov.in) to search and download Government Orders. OfficeMitra also publishes selected GOs and circulars in the Document Library when administrators upload them. For disputed or legally complex matters, consult your departmental legal cell.",
-  },
-  {
-    id: "faq-003-cfms",
-    category: "finance",
-    title: "What is CFMS and who uses it?",
-    body: "CFMS (Comprehensive Financial Management System) is Andhra Pradesh's online system for pay bills, receipts, and DDO financial workflows. Drawing and Disbursing Officers (DDOs) and ministerial staff in finance sections use it daily. Access it at cfms.ap.gov.in with your department credentials.",
-  },
-  {
-    id: "faq-004-leave",
-    category: "leave",
-    title: "How do I check my leave balance?",
-    body: "Log in to HRMS Employee Self Service (hrms.ap.gov.in) with your employee credentials. Leave balances and service details are shown in your profile. For leave applications, follow your institution's internal procedure and your controlling officer's approval channel.",
-  },
-  {
-    id: "faq-005-apgli",
-    category: "apgli",
-    title: "Where can I view my APGLI policy details?",
-    body: "Visit the APGLI portal at apgli.ap.gov.in. You can check policy number, insurable amount, premium deductions, and claim-related information. Monthly premium is also reflected on your pay slip. Use the APGLI Premium Calculator on OfficeMitra for a rough estimate only.",
-  },
-  {
-    id: "faq-006-el",
-    category: "leave",
-    title: "How is Earned Leave (EL) credited to AP government employees?",
-    body: "Under AP leave rules, Earned Leave is generally credited at 15 days per year (1.25 days per month) for employees entitled to EL, subject to service conditions and applicable GOs. Actual entitlement depends on your category, length of service, and any breaks in service. Verify with HRMS records and current leave rules.",
-  },
-];
-
 const env = { ...loadEnv(path.join(root, ".env.local")), ...loadEnv(path.join(root, ".env.production.local")) };
 const url = process.env.POSTGRES_URL ?? env.POSTGRES_URL ?? env.DATABASE_URL;
 if (!url) {
@@ -83,7 +47,16 @@ if (!url) {
 const sql = neon(url);
 const now = new Date().toISOString();
 
-for (const faq of faqs) {
+// Remove old FAQ entries not in the new set (optional cleanup of previous 6)
+const keepIds = new Set(faqEntries.map((f) => f.id));
+const existing = await sql`SELECT id FROM cms_content WHERE content_type = 'faq'`;
+for (const row of existing) {
+  if (!keepIds.has(String(row.id))) {
+    await sql`DELETE FROM cms_content WHERE id = ${String(row.id)}`;
+  }
+}
+
+for (const faq of faqEntries) {
   const slug = slugify(faq.title);
   await sql`
     INSERT INTO cms_content (id, content_type, slug, status, title, summary, category, body, data, created_at, updated_at)
@@ -99,7 +72,6 @@ for (const faq of faqs) {
       body = EXCLUDED.body,
       updated_at = EXCLUDED.updated_at
   `;
-  console.log("FAQ:", faq.title);
 }
 
-console.log(`Seeded ${faqs.length} FAQ entries.`);
+console.log(`Seeded ${faqEntries.length} FAQ entries.`);

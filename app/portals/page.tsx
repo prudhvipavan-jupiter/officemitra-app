@@ -1,23 +1,25 @@
+"use client";
+
 import { ExternalLink } from "lucide-react";
+import { useMemo, useState } from "react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { DisclaimerNotice } from "@/components/ui/DisclaimerNotice";
-import { portalLinks } from "@/lib/site-data";
-
-const categoryLabels: Record<string, string> = {
-  finance: "Finance",
-  establishment: "Establishment",
-  health: "Health",
-  general: "General",
-};
-
-const categoryColors: Record<string, string> = {
-  finance: "bg-emerald-50 text-emerald-700",
-  establishment: "bg-blue-50 text-blue-700",
-  health: "bg-rose-50 text-rose-700",
-  general: "bg-gray-100 text-gray-700",
-};
+import {
+  portalLinks,
+  portalCategories,
+  PORTAL_CATEGORY_LABELS,
+  PORTAL_CATEGORY_COLORS,
+} from "@/lib/site-data";
+import type { PortalCategory } from "@/lib/site-data";
 
 export default function PortalsPage() {
+  const [category, setCategory] = useState<PortalCategory | "all">("all");
+
+  const filtered = useMemo(
+    () => (category === "all" ? portalLinks : portalLinks.filter((p) => p.category === category)),
+    [category],
+  );
+
   return (
     <>
       <div className="page-header">
@@ -25,34 +27,60 @@ export default function PortalsPage() {
           <PageHeader
             breadcrumb={[{ label: "Home", href: "/" }, { label: "Official Portals" }]}
             title="Official Portals"
-            description="Curated links to Andhra Pradesh government systems. OfficeMitra is not affiliated with these portals."
+            description={`${portalLinks.length} curated links to AP and central government systems used by ministerial staff.`}
           />
         </div>
       </div>
       <div className="page-body">
         <DisclaimerNotice />
-        <ul className="mt-10 space-y-4">
-          {portalLinks.map((p) => (
-            <li key={p.url} className="card group">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                  <span className={`badge ${categoryColors[p.category]}`}>{categoryLabels[p.category]}</span>
-                  <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 flex items-center gap-2 font-semibold text-navy-900 hover:text-gold-600"
-                  >
-                    {p.name}
-                    <ExternalLink className="h-4 w-4 shrink-0 opacity-60" />
-                  </a>
-                  <p className="mt-1.5 text-sm text-gray-600">{p.description}</p>
-                </div>
+        <div className="mt-8 flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => setCategory("all")}
+            className={`rounded-full px-3 py-1.5 text-sm font-medium transition ${
+              category === "all" ? "bg-navy-800 text-white" : "bg-navy-50 text-navy-700 hover:bg-navy-100"
+            }`}
+          >
+            All ({portalLinks.length})
+          </button>
+          {portalCategories.map((cat) => {
+            const count = portalLinks.filter((p) => p.category === cat).length;
+            return (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setCategory(cat)}
+                className={`rounded-full px-3 py-1.5 text-sm font-medium transition ${
+                  category === cat ? "bg-navy-800 text-white" : "bg-navy-50 text-navy-700 hover:bg-navy-100"
+                }`}
+              >
+                {PORTAL_CATEGORY_LABELS[cat]} ({count})
+              </button>
+            );
+          })}
+        </div>
+        <ul className="mt-8 grid gap-4 lg:grid-cols-2">
+          {filtered.map((p) => (
+            <li key={p.url + p.name} className="card group">
+              <div className="flex flex-col gap-3">
+                <span className={`badge w-fit ${PORTAL_CATEGORY_COLORS[p.category]}`}>
+                  {PORTAL_CATEGORY_LABELS[p.category]}
+                </span>
                 <a
                   href={p.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-secondary shrink-0 self-start text-sm"
+                  className="flex items-start gap-2 font-semibold text-navy-900 hover:text-gold-600"
+                >
+                  {p.name}
+                  <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 opacity-60" />
+                </a>
+                <p className="text-sm text-gray-600">{p.description}</p>
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary w-fit text-sm"
                 >
                   Open portal
                 </a>
