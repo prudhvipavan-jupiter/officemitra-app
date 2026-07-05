@@ -25,7 +25,59 @@ body {
 }
 
 .hero-gradient {
-  background: linear-gradient(145deg, #0a1628 0%, #1b2a4a 50%, #243a66 100%);
+  background: linear-gradient(145deg, #0a1628 0%, #1b2a4a 45%, #243a66 100%);
+}
+
+.home-section {
+  @apply mx-auto max-w-6xl px-4 py-16 md:py-20;
+}
+
+.home-heading {
+  @apply text-2xl font-bold tracking-tight text-navy-900 md:text-3xl;
+}
+
+.home-subheading {
+  @apply mt-3 text-base leading-relaxed text-gray-600 md:text-lg;
+}
+
+.home-card {
+  @apply rounded-2xl border border-transparent bg-white p-6 shadow-md shadow-navy-900/10 transition duration-300 hover:-translate-y-1 hover:border-gold-200 hover:shadow-lg;
+}
+
+.home-stat-card {
+  @apply flex flex-col items-center justify-center rounded-2xl border border-transparent bg-white px-4 py-6 text-center shadow-md shadow-navy-900/10 transition duration-300 hover:border-gold-200 hover:shadow-lg;
+}
+
+.home-chip {
+  @apply rounded-full border border-navy-200 bg-white px-4 py-2 text-sm font-medium text-navy-800 shadow-sm transition hover:border-gold-300 hover:bg-gold-100 hover:text-gold-700 hover:shadow-md;
+}
+
+.home-trust-card {
+  @apply border-gold-200 bg-gradient-to-br from-white via-white to-gold-100;
+}
+
+.home-expert-banner {
+  @apply shadow-lg;
+}
+
+.home-testimonial {
+  @apply rounded-2xl border border-navy-700 bg-navy-800/80 p-6;
+}
+
+.home-fade-in {
+  @apply translate-y-4 opacity-0 transition duration-700 ease-out;
+}
+
+.home-fade-in-visible {
+  @apply translate-y-0 opacity-100;
+}
+
+.card {
+  @apply rounded-2xl border border-navy-100 bg-white p-6 shadow-md shadow-navy-900/10 transition duration-300 hover:border-gold-200 hover:shadow-lg;
+}
+
+.card-interactive {
+  @apply rounded-2xl border border-navy-100 bg-white p-6 shadow-md shadow-navy-900/10 transition duration-300 hover:-translate-y-1 hover:border-gold-200 hover:shadow-lg;
 }
 
 .page-header {
@@ -49,19 +101,11 @@ body {
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg bg-gold-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-gold-500 active:scale-[0.98];
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-gold-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-gold-500 active:scale-[0.98];
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg border border-navy-200 bg-white px-5 py-2.5 text-sm font-semibold text-navy-800 shadow-sm transition hover:border-navy-300 hover:bg-navy-50 active:scale-[0.98];
-}
-
-.card {
-  @apply rounded-2xl border border-navy-100 bg-white p-6 shadow-sm transition hover:border-gold-200 hover:shadow-md;
-}
-
-.card-interactive {
-  @apply rounded-2xl border border-navy-100 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-gold-200 hover:shadow-md;
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-navy-200 bg-white px-5 py-2.5 text-sm font-semibold text-navy-800 shadow-sm transition hover:border-navy-300 hover:bg-navy-50 active:scale-[0.98];
 }
 
 .module-icon {

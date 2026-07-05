@@ -15,9 +15,8 @@ export async function HomeLatest() {
   if (latestUpdates.length === 0 && latestArticles.length === 0) return null;
 
   return (
-    <section className="border-t border-navy-100 bg-white px-4 py-14">
-      <div className="page-body !py-0">
-        <h2 className="text-2xl font-bold text-navy-900">Latest from OfficeMitra</h2>
+    <section className="home-section border-t border-navy-100/80 !py-14">
+      <h2 className="home-heading">Latest from OfficeMitra</h2>
         <div className="mt-8 grid gap-8 lg:grid-cols-2">
           {latestUpdates.length > 0 && (
             <div>
@@ -60,10 +59,9 @@ export async function HomeLatest() {
             </div>
           )}
         </div>
-        <Link href="/knowledge" className="mt-8 inline-flex items-center gap-1 text-sm font-medium text-navy-700 hover:text-gold-600">
+        <Link href="/knowledge" className="mt-8 inline-flex items-center gap-1 text-sm font-semibold text-gold-600 hover:text-gold-700">
           Explore Knowledge Hub <ArrowRight className="h-4 w-4" />
         </Link>
-      </div>
     </section>
   );
 }

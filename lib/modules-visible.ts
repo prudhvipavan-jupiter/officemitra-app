@@ -5,7 +5,8 @@ import { platformModules, secondaryModules, type PlatformModule } from "./module
 export const processTemplatesModule: PlatformModule = {
   href: "/process-templates",
   title: "Process & Templates",
-  description: "Step-by-step office workflows and downloadable document formats",
+  description:
+    "Step-by-step workflows, office notes, proceedings, drafting formats, and downloadable templates.",
   icon: ClipboardList,
   accent: "bg-indigo-50 text-indigo-700",
 };

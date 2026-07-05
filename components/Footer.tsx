@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HERO_DESCRIPTION } from "@/lib/site-config";
+import { FOOTER_DESCRIPTION } from "@/lib/data/homepage";
 
 export function Footer({ logoUrl, visitorCount }: { logoUrl?: string | null; visitorCount?: number | null }) {
   const pathname = usePathname();
@@ -23,8 +23,8 @@ export function Footer({ logoUrl, visitorCount }: { logoUrl?: string | null; vis
               )}
               <p className="text-lg font-bold text-white">OfficeMitra</p>
             </div>
-            <p className="mt-3 max-w-sm text-sm leading-relaxed text-navy-200">
-              {HERO_DESCRIPTION}
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-navy-200">
+              {FOOTER_DESCRIPTION}
             </p>
           </div>
           <div>
