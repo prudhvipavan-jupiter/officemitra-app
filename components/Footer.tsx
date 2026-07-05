@@ -10,35 +10,46 @@ export function Footer() {
   return (
     <footer className="mt-auto border-t border-navy-800 bg-navy-900 text-navy-100">
       <div className="mx-auto max-w-6xl px-4 py-12">
-        <div className="grid gap-8 md:grid-cols-3">
-          <div>
+        <div className="grid gap-10 md:grid-cols-4">
+          <div className="md:col-span-2">
             <p className="text-lg font-bold text-white">OfficeMitra</p>
-            <p className="mt-2 text-sm text-navy-200">
-              Knowledge, documents, and practical guidance for AP government ministerial staff.
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-navy-200">
+              A professional administrative knowledge platform for Andhra Pradesh government ministerial staff.
+              Articles, documents, tools, and community — built for practical office work.
             </p>
           </div>
           <div>
-            <p className="font-semibold text-white">Platform</p>
-            <ul className="mt-3 space-y-2 text-sm">
-              <li><Link href="/knowledge" className="hover:text-white">Knowledge</Link></li>
-              <li><Link href="/documents" className="hover:text-white">Documents</Link></li>
-              <li><Link href="/community" className="hover:text-white">Community</Link></li>
-              <li><Link href="/tools" className="hover:text-white">Tools</Link></li>
+            <p className="text-sm font-semibold uppercase tracking-wide text-white">Platform</p>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              <li><Link href="/knowledge" className="text-navy-200 hover:text-white">Knowledge Hub</Link></li>
+              <li><Link href="/documents" className="text-navy-200 hover:text-white">Documents</Link></li>
+              <li><Link href="/updates" className="text-navy-200 hover:text-white">Updates</Link></li>
+              <li><Link href="/community" className="text-navy-200 hover:text-white">Staff Community</Link></li>
+              <li><Link href="/tools" className="text-navy-200 hover:text-white">Office Tools</Link></li>
+              <li><Link href="/portals" className="text-navy-200 hover:text-white">Official Portals</Link></li>
             </ul>
           </div>
           <div>
-            <p className="font-semibold text-white">Company</p>
-            <ul className="mt-3 space-y-2 text-sm">
-              <li><Link href="/about" className="hover:text-white">About</Link></li>
-              <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-              <li><Link href="/privacy" className="hover:text-white">Privacy</Link></li>
-              <li><Link href="/terms" className="hover:text-white">Terms</Link></li>
+            <p className="text-sm font-semibold uppercase tracking-wide text-white">Company</p>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              <li><Link href="/about" className="text-navy-200 hover:text-white">About</Link></li>
+              <li><Link href="/expert" className="text-navy-200 hover:text-white">Expert Help</Link></li>
+              <li><Link href="/contact" className="text-navy-200 hover:text-white">Contact</Link></li>
+              <li><Link href="/privacy" className="text-navy-200 hover:text-white">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-navy-200 hover:text-white">Terms of Use</Link></li>
             </ul>
           </div>
         </div>
-        <p className="mt-10 border-t border-navy-800 pt-6 text-xs text-navy-300">
-          <strong className="text-white">Disclaimer:</strong> OfficeMitra is not an official government website and does
-          not provide legal advice. Verify all information with current Government Orders and your controlling officer.
+        <div className="mt-10 rounded-xl border border-navy-800 bg-navy-800/50 px-5 py-4">
+          <p className="text-xs leading-relaxed text-navy-200">
+            <strong className="text-white">Disclaimer:</strong> OfficeMitra is a professional administrative knowledge
+            platform. It is <strong className="text-white">not</strong> an official government website and does{" "}
+            <strong className="text-white">not</strong> provide legal advice. Content is for guidance purposes only.
+            Always verify with current Government Orders and your controlling officer.
+          </p>
+        </div>
+        <p className="mt-6 text-xs text-navy-400">
+          © {new Date().getFullYear()} OfficeMitra. Andhra Pradesh, India.
         </p>
       </div>
     </footer>

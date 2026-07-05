@@ -1,4 +1,8 @@
 import Link from "next/link";
+import { Download, FolderOpen } from "lucide-react";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { DisclaimerNotice } from "@/components/ui/DisclaimerNotice";
 import { listContent } from "@/lib/cms/store";
 
 export const dynamic = "force-dynamic";
@@ -7,28 +11,52 @@ export default async function DocumentsPage() {
   const docs = await listContent("document", true);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-bold text-navy-900">Document Library</h1>
-      <p className="mt-2 text-gray-600">GOs, circulars, forms, and office documents.</p>
-      {docs.length === 0 ? (
-        <p className="mt-10 rounded-xl border border-dashed border-navy-200 py-12 text-center text-gray-500">No documents yet.</p>
-      ) : (
-        <ul className="mt-8 space-y-3">
-          {docs.map((d) => (
-            <li key={d.id} className="card flex items-center justify-between">
-              <div>
-                <p className="font-semibold">{d.title}</p>
-                <p className="text-sm text-gray-500">{d.summary}</p>
-              </div>
-              {d.data.file ? (
-                <a href={String(d.data.file)} className="btn-secondary text-sm" target="_blank" rel="noopener noreferrer">
-                  Download
-                </a>
-              ) : null}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <>
+      <div className="page-header">
+        <div className="page-header-inner">
+          <PageHeader
+            breadcrumb={[{ label: "Home", href: "/" }, { label: "Documents" }]}
+            title="Document Library"
+            description="Government Orders, circulars, forms, and reference files — uploaded and managed through the admin CMS."
+          />
+        </div>
+      </div>
+      <div className="page-body">
+        <DisclaimerNotice />
+        {docs.length === 0 ? (
+          <div className="mt-10">
+            <EmptyState
+              icon={FolderOpen}
+              title="No documents published yet"
+              description="GOs, circulars, and office reference files will be listed here once uploaded. Documents are added by administrators — not scraped from other sites."
+            >
+              <Link href="/portals" className="btn-secondary">Browse Official Portals</Link>
+            </EmptyState>
+          </div>
+        ) : (
+          <ul className="mt-10 space-y-3">
+            {docs.map((d) => (
+              <li key={d.id} className="card flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="font-semibold text-navy-900">{d.title}</p>
+                  <p className="mt-1 text-sm text-gray-600">{d.summary}</p>
+                </div>
+                {d.data.file ? (
+                  <a
+                    href={String(d.data.file)}
+                    className="btn-secondary shrink-0 text-sm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Download className="h-4 w-4" />
+                    Download
+                  </a>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   );
 }

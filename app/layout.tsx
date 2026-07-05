@@ -5,13 +5,25 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://theofficemitra.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "OfficeMitra",
+    default: "OfficeMitra — AP Government Office Knowledge",
     template: "%s | OfficeMitra",
   },
   description:
-    "Administrative knowledge, documents, community Q&A, and office tools for Andhra Pradesh government staff.",
+    "Administrative knowledge, documents, community Q&A, and office tools for Andhra Pradesh government ministerial staff.",
+  openGraph: {
+    title: "OfficeMitra",
+    description: "One stop for AP government office knowledge and tools.",
+    url: siteUrl,
+    siteName: "OfficeMitra",
+    locale: "en_IN",
+    type: "website",
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
