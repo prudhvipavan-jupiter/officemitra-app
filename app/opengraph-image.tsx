@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { SITE_NAME, SITE_TAGLINE } from "@/lib/site-config";
+import { HERO_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/site-config";
 
 export const alt = SITE_NAME;
 export const size = { width: 1200, height: 630 };
@@ -47,8 +47,8 @@ export default function OpenGraphImage() {
           <div style={{ fontSize: 48, fontWeight: 700 }}>{SITE_NAME}</div>
         </div>
         <div style={{ fontSize: 32, color: "#e6c86a", maxWidth: 800, lineHeight: 1.3 }}>{SITE_TAGLINE}</div>
-        <div style={{ marginTop: 24, fontSize: 22, color: "#c5cfe0" }}>
-          FAQ · AP G.O. calculators · Official portals · Expert guidance
+        <div style={{ marginTop: 24, fontSize: 22, color: "#c5cfe0", maxWidth: 900, lineHeight: 1.4 }}>
+          {HERO_DESCRIPTION}
         </div>
       </div>
     ),

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { HERO_DESCRIPTION } from "@/lib/site-config";
 
 export function Footer({ logoUrl, visitorCount }: { logoUrl?: string | null; visitorCount?: number | null }) {
   const pathname = usePathname();
@@ -23,8 +24,7 @@ export function Footer({ logoUrl, visitorCount }: { logoUrl?: string | null; vis
               <p className="text-lg font-bold text-white">OfficeMitra</p>
             </div>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-navy-200">
-              A professional administrative knowledge platform for Andhra Pradesh government ministerial staff.
-              Articles, documents, tools, and community — built for practical office work.
+              {HERO_DESCRIPTION}
             </p>
           </div>
           <div>

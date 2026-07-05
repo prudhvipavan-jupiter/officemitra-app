@@ -4,6 +4,7 @@ import { HomeLatest } from "@/components/home/HomeLatest";
 import { HomeSearch } from "@/components/HomeSearch";
 import { WebSiteJsonLd } from "@/components/seo/WebSiteJsonLd";
 import { getVisiblePlatformModules, secondaryModules } from "@/lib/modules-visible";
+import { HERO_DESCRIPTION, HERO_HEADLINE } from "@/lib/site-config";
 import { getSiteSettings } from "@/lib/site/settings-store";
 import { getPublicSiteStats } from "@/lib/site-stats";
 
@@ -21,11 +22,10 @@ export default async function HomePage() {
             Andhra Pradesh · English
           </p>
           <h1 className="mt-6 text-3xl font-bold leading-tight tracking-tight md:text-5xl md:leading-tight">
-            One stop for office knowledge and tools
+            {HERO_HEADLINE}
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-navy-100">
-            Practical guidance for AP government ministerial staff — FAQ, AP G.O. calculators, official portal links,
-            articles, and expert assistance when cases are complex.
+            {HERO_DESCRIPTION}
           </p>
           <HomeSearch />
           <div className="mt-8 flex flex-wrap justify-center gap-3">

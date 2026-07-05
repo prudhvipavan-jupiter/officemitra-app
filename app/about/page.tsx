@@ -1,5 +1,6 @@
 import { PageHeader } from "@/components/ui/PageHeader";
 import { DisclaimerNotice } from "@/components/ui/DisclaimerNotice";
+import { HERO_DESCRIPTION, HERO_HEADLINE } from "@/lib/site-config";
 
 export default function AboutPage() {
   return (
@@ -11,11 +12,8 @@ export default function AboutPage() {
       </div>
       <div className="page-body-narrow prose-article">
         <DisclaimerNotice />
-        <p className="mt-8">
-          OfficeMitra is a professional administrative knowledge platform for Andhra Pradesh government ministerial
-          staff. We help you find practical guidance on office procedures, understand Government Orders, and use
-          everyday tools — without wading through scattered PDFs and circulars.
-        </p>
+        <p className="mt-8">{HERO_HEADLINE}</p>
+        <p>{HERO_DESCRIPTION}</p>
         <h2>The problem we solve</h2>
         <p>
           Government employees spend hours searching scattered GOs, circulars, and office files, yet still lack clear

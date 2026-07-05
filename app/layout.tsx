@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SiteShell } from "@/components/SiteShell";
-import { CONTACT_EMAIL, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site-config";
+import { CONTACT_EMAIL, HERO_DESCRIPTION, HERO_HEADLINE, SITE_NAME, SITE_TAGLINE, SITE_URL } from "@/lib/site-config";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     default: `${SITE_NAME} — ${SITE_TAGLINE}`,
     template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Administrative knowledge, AP G.O. calculators, official portals, FAQ, and expert guidance for Andhra Pradesh government ministerial staff.",
+  description: HERO_DESCRIPTION,
   keywords: [
     "Andhra Pradesh government",
     "ministerial staff",
+    "DDO",
     "DA calculator",
     "APGLI",
     "GPF",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   authors: [{ name: SITE_NAME }],
   openGraph: {
     title: SITE_NAME,
-    description: "One stop for AP government office knowledge, tools, and expert guidance.",
+    description: HERO_DESCRIPTION,
     url: SITE_URL,
     siteName: SITE_NAME,
     locale: "en_IN",
