@@ -69,7 +69,7 @@ function StatCard({
       <p className="text-3xl font-bold tracking-tight text-navy-900 md:text-4xl">
         {active ? (display ?? `${count}${suffix}`) : "0"}
       </p>
-      <p className="mt-2 text-sm font-medium text-gray-600 group-hover:text-navy-800">{label}</p>
+      <p className="mt-2 text-sm font-medium leading-snug text-gray-600 group-hover:text-navy-800">{label}</p>
     </Link>
   );
 }
@@ -81,7 +81,7 @@ export function HomeStats({
 }) {
   return (
     <section className="border-b border-navy-100/80 bg-gradient-to-b from-white to-navy-50/50 px-4 py-12 md:py-16">
-      <div className="mx-auto grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
         {stats.map((item, i) => (
           <StatCard key={item.label} {...item} delay={i * 80} />
         ))}

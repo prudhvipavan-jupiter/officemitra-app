@@ -57,6 +57,8 @@ type HomeModule = {
 };
 
 export function HomeModulesGrid({ modules }: { modules: HomeModule[] }) {
+  const orphanLast = modules.length % 3 === 1;
+
   return (
     <section className="home-section">
       <FadeIn>
@@ -65,22 +67,27 @@ export function HomeModulesGrid({ modules }: { modules: HomeModule[] }) {
           <p className="home-subheading">{HOME_MODULES_SECTION.subtitle}</p>
         </div>
       </FadeIn>
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="home-module-grid mt-12">
         {modules.map((mod, i) => {
           const Icon = MODULE_ICONS[mod.href] ?? BookOpen;
+          const isOrphan = orphanLast && i === modules.length - 1;
           return (
-          <FadeIn key={mod.href} delay={i * 60}>
-            <Link href={mod.href} className="home-card group flex h-full flex-col">
-              <div className={`module-icon ${mod.accent}`}>
-                <Icon className="h-5 w-5" strokeWidth={1.75} />
-              </div>
-              <h3 className="mt-5 text-lg font-semibold text-navy-900 group-hover:text-navy-700">{mod.title}</h3>
-              <p className="mt-2 flex-1 text-[0.9375rem] leading-relaxed text-gray-600">{mod.description}</p>
-              <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-gold-600">
-                Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-              </span>
-            </Link>
-          </FadeIn>
+            <FadeIn
+              key={mod.href}
+              delay={i * 60}
+              className={isOrphan ? "home-module-grid-orphan" : "h-full"}
+            >
+              <Link href={mod.href} className="home-card group flex h-full flex-col">
+                <div className={`module-icon ${mod.accent}`}>
+                  <Icon className="h-5 w-5" strokeWidth={1.75} />
+                </div>
+                <h3 className="mt-5 text-lg font-semibold text-navy-900 group-hover:text-navy-700">{mod.title}</h3>
+                <p className="mt-2 flex-1 text-[0.9375rem] leading-relaxed text-gray-600">{mod.description}</p>
+                <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-gold-600">
+                  Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            </FadeIn>
           );
         })}
       </div>
@@ -98,9 +105,9 @@ export function HomePopularTopics() {
         </p>
       </FadeIn>
       <FadeIn delay={100}>
-        <div className="mt-8 flex flex-wrap justify-center gap-2.5">
+        <div className="home-topics-grid mt-8">
           {HOME_POPULAR_TOPICS.map((topic) => (
-            <Link key={topic.label} href={topic.href} className="home-chip">
+            <Link key={topic.label} href={topic.href} className="home-chip justify-center text-center">
               {topic.label}
             </Link>
           ))}
@@ -116,12 +123,12 @@ export function HomeWhyOfficeMitra() {
       <FadeIn>
         <h2 className="home-heading text-center">Why OfficeMitra?</h2>
       </FadeIn>
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:items-stretch">
         {HOME_WHY_OM.map((item, i) => {
           const Icon = WHY_ICONS[item.icon];
           return (
-            <FadeIn key={item.title} delay={i * 70}>
-              <div className="home-card h-full text-center">
+            <FadeIn key={item.title} delay={i * 70} className="h-full">
+              <div className="home-card flex h-full flex-col text-center">
                 <div className="module-icon mx-auto bg-gold-100 text-gold-700">
                   <Icon className="h-5 w-5" />
                 </div>
@@ -142,12 +149,12 @@ export function HomeMoreHelp() {
       <FadeIn>
         <h2 className="home-heading text-center">{HOME_HELP_SECTION.title}</h2>
       </FadeIn>
-      <div className="mt-10 grid gap-5 md:grid-cols-3">
+      <div className="mt-10 grid gap-5 md:grid-cols-3 md:items-stretch">
         {HOME_HELP_SECTION.cards.map((card, i) => {
           const Icon = HELP_ICONS[card.icon];
           return (
-            <FadeIn key={card.title} delay={i * 80}>
-              <div className="home-card flex h-full flex-col">
+            <FadeIn key={card.title} delay={i * 80} className="h-full">
+              <div className="home-card flex h-full min-h-[220px] flex-col">
                 <div className="module-icon bg-white text-navy-700 ring-1 ring-navy-100">
                   <Icon className="h-5 w-5" />
                 </div>
@@ -169,11 +176,11 @@ export function HomeTrust() {
   return (
     <section className="home-section">
       <FadeIn>
-        <div className="home-card home-trust-card mx-auto max-w-4xl">
-          <h2 className="home-heading text-center md:text-left">{HOME_TRUST.title}</h2>
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+        <div className="home-card home-trust-card">
+          <h2 className="home-heading text-center">{HOME_TRUST.title}</h2>
+          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {HOME_TRUST.items.map((item) => (
-              <li key={item} className="flex gap-3 text-[0.9375rem] leading-relaxed text-gray-700">
+              <li key={item} className="flex gap-3 rounded-xl bg-white/60 p-4 text-[0.9375rem] leading-relaxed text-gray-700">
                 <Check className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" aria-hidden />
                 {item}
               </li>
@@ -190,13 +197,13 @@ export function HomeExpertBanner() {
   return (
     <section className="home-section !pb-20">
       <FadeIn>
-        <div className="expert-banner home-expert-banner md:flex md:items-center md:justify-between md:gap-10">
-          <div className="pl-3">
+        <div className="expert-banner home-expert-banner grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+          <div>
             <p className="text-xs font-bold uppercase tracking-widest text-gold-600">{b.eyebrow}</p>
             <h2 className="mt-3 text-2xl font-bold text-navy-900 md:text-3xl">{b.title}</h2>
             <p className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-gray-700">{b.description}</p>
           </div>
-          <div className="mt-8 flex shrink-0 flex-wrap gap-3 md:mt-0">
+          <div className="flex shrink-0 flex-col gap-3 sm:flex-row md:flex-col lg:flex-row">
             <Link href={b.primaryCta.href} className="btn-primary shadow-md shadow-gold-600/20">
               {b.primaryCta.label}
             </Link>
