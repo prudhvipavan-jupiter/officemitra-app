@@ -73,7 +73,7 @@ export const secondaryModules = [
   {
     href: "/expert",
     title: "Expert Help",
-    description: "Guidance from experienced Health Department practitioners",
+    description: "Guidance from experienced AP Government ministerial experts",
     icon: FileText,
   },
 ];

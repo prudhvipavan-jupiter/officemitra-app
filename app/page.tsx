@@ -139,8 +139,8 @@ export default async function HomePage() {
             <p className="text-xs font-bold uppercase tracking-widest text-gold-600">Expert Assistance</p>
             <h2 className="mt-2 text-2xl font-bold text-navy-900">Need professional guidance?</h2>
             <p className="mt-2 max-w-lg text-gray-700">
-              Contact us for establishment and finance guidance from practitioners with Health Department
-              administrative experience. Not legal advice — practical office guidance only.
+              Get personalized guidance on bills, pension proposals, service registers, leave, pay fixation, and
+              administrative cases from experienced AP Government ministerial experts. Guidance only — not legal advice.
             </p>
           </div>
           <div className="mt-6 flex shrink-0 flex-wrap gap-3 md:mt-0">
