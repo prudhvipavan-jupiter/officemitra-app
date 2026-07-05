@@ -115,7 +115,6 @@ const toolComponents: Record<string, React.ReactNode> = {
   "pay-bill-checklist": <PayBillChecklist />,
   "probation-calculator": <ProbationCalculator />,
   "leave-accrual": <SimpleCalc label="Months of service" formula={(m) => m * 1.25} unit="days (approx.)" />,
-  "el-encashment": <SimpleCalc label="Basic pay (₹)" formula={(b) => b * 0.5} unit="₹ (rough estimate)" />,
   "working-days": <WorkingDays />,
   "apgli-premium": <SimpleCalc label="Insurable amount (₹)" formula={(a) => a * 0.045} unit="₹" />,
 };

@@ -5,50 +5,65 @@ export interface PortalLink {
   category: "finance" | "establishment" | "health" | "general";
 }
 
+/** Curated AP portals used most often by ministerial staff */
 export const portalLinks: PortalLink[] = [
   {
     name: "CFMS — Comprehensive Financial Management System",
     url: "https://cfms.ap.gov.in/",
-    description: "Pay bills, receipts, and DDO workflows",
-    category: "finance",
-  },
-  {
-    name: "GOIR — Government Orders Repository",
-    url: "https://goir.ap.gov.in/",
-    description: "Search Andhra Pradesh Government Orders",
-    category: "general",
-  },
-  {
-    name: "APGLI",
-    url: "https://apgli.ap.gov.in/",
-    description: "AP Government Life Insurance policies and claims",
+    description: "Generate pay bills, receipts, and DDO financial workflows",
     category: "finance",
   },
   {
     name: "HRMS — Employee Self Service",
     url: "https://hrms.ap.gov.in/",
-    description: "Service details, leave, and employee records",
+    description: "Service book, leave balance, and employee records",
     category: "establishment",
+  },
+  {
+    name: "GOIR — Government Orders Repository",
+    url: "https://goir.ap.gov.in/",
+    description: "Search and download Andhra Pradesh Government Orders",
+    category: "general",
+  },
+  {
+    name: "APGLI Portal",
+    url: "https://apgli.ap.gov.in/",
+    description: "Policy details, premium, and AP Government Life Insurance claims",
+    category: "finance",
   },
   {
     name: "EHS — Employees Health Scheme",
     url: "https://ehs.ap.gov.in/",
-    description: "Health scheme eligibility and hospitals",
+    description: "Health scheme eligibility, empanelled hospitals, and cards",
     category: "health",
-  },
-  {
-    name: "NIDHI — Treasury Portal",
-    url: "https://nidhi.ap.gov.in/",
-    description: "Treasury and account-related services",
-    category: "finance",
   },
 ];
 
+/** Daily-use calculators and checklists for AP ministerial staff */
 export const tools = [
-  { slug: "pay-bill-checklist", title: "Pay Bill Checklist", description: "Monthly pay bill verification steps for DDOs" },
-  { slug: "probation-calculator", title: "Probation Calculator", description: "Estimate probation completion date" },
-  { slug: "leave-accrual", title: "Leave Accrual Estimator", description: "Estimate earned leave balance" },
-  { slug: "el-encashment", title: "EL Encashment Calculator", description: "Rough EL encashment amount estimate" },
-  { slug: "working-days", title: "Working Days Calculator", description: "Count working days between two dates" },
-  { slug: "apgli-premium", title: "APGLI Premium Calculator", description: "Estimate APGLI premium deduction" },
+  {
+    slug: "pay-bill-checklist",
+    title: "Pay Bill Checklist",
+    description: "Step-by-step verification before forwarding the monthly pay bill",
+  },
+  {
+    slug: "leave-accrual",
+    title: "Leave Accrual Estimator",
+    description: "Rough estimate of earned leave accrued based on months of service",
+  },
+  {
+    slug: "working-days",
+    title: "Working Days Calculator",
+    description: "Count working days between two dates (excludes Saturdays and Sundays)",
+  },
+  {
+    slug: "apgli-premium",
+    title: "APGLI Premium Calculator",
+    description: "Estimate monthly APGLI premium from insurable amount",
+  },
+  {
+    slug: "probation-calculator",
+    title: "Probation Calculator",
+    description: "Estimate probation completion date from date of joining",
+  },
 ] as const;

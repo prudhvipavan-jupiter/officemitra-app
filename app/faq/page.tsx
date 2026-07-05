@@ -33,8 +33,9 @@ export default async function FaqPage() {
         ) : (
           <dl className="mt-10 space-y-4">
             {items.map((item) => (
-              <div key={item.id} className="card">
-                <dt className="font-semibold text-navy-900">{item.title}</dt>
+            <div key={item.id} className="card">
+              <span className="badge bg-navy-50 text-navy-700">{item.category}</span>
+              <dt className="mt-2 font-semibold text-navy-900">{item.title}</dt>
                 <dd className="mt-2 leading-relaxed text-gray-700">{item.body}</dd>
               </div>
             ))}

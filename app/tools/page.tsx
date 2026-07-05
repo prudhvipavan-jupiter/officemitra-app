@@ -5,7 +5,6 @@ import {
   Calendar,
   CheckSquare,
   Clock,
-  Coins,
   Wallet,
 } from "lucide-react";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -16,7 +15,6 @@ const toolIcons: Record<string, ReactNode> = {
   "pay-bill-checklist": <CheckSquare className="h-5 w-5" />,
   "probation-calculator": <Clock className="h-5 w-5" />,
   "leave-accrual": <Calendar className="h-5 w-5" />,
-  "el-encashment": <Coins className="h-5 w-5" />,
   "working-days": <Calculator className="h-5 w-5" />,
   "apgli-premium": <Wallet className="h-5 w-5" />,
 };

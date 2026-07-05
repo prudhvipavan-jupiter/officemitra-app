@@ -50,7 +50,7 @@ export const platformModules: PlatformModule[] = [
   {
     href: "/tools",
     title: "Office Tools",
-    description: "Six free calculators and checklists for daily AP government work",
+    description: "Five free calculators and checklists for daily AP government work",
     icon: Calculator,
     accent: "bg-rose-50 text-rose-700",
   },
