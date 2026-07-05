@@ -21,6 +21,9 @@ export default async function DocumentDetailPage({ params }: { params: Promise<{
 
   const fileUrl = doc.data.file ? String(doc.data.file) : null;
   const externalUrl = doc.data.external_url ? String(doc.data.external_url) : null;
+  const goNumber = doc.data.go_number ? String(doc.data.go_number) : null;
+  const dated = doc.data.dated ? String(doc.data.dated) : null;
+  const department = doc.data.department ? String(doc.data.department) : null;
 
   return (
     <>
@@ -31,9 +34,19 @@ export default async function DocumentDetailPage({ params }: { params: Promise<{
             <span className="mx-2">/</span>
             <Link href="/documents" className="hover:text-navy-700">Documents</Link>
           </nav>
-          <span className="badge bg-navy-50 text-navy-700">{doc.category}</span>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <span className="badge bg-navy-50 text-navy-700">{doc.category}</span>
+            {goNumber && (
+              <span className="badge bg-gold-100 text-gold-800">{goNumber}</span>
+            )}
+          </div>
           <h1 className="mt-3 text-2xl font-bold tracking-tight text-navy-900 md:text-3xl">{doc.title}</h1>
           {doc.summary && <p className="mt-3 text-lg text-gray-600">{doc.summary}</p>}
+          {(department || dated) && (
+            <p className="mt-2 text-sm text-gray-500">
+              {[department, dated && `Dated ${dated}`].filter(Boolean).join(" · ")}
+            </p>
+          )}
         </div>
       </div>
       <div className="page-body-narrow">

@@ -9,7 +9,9 @@
     "lint": "eslint",
     "seed:faq": "node scripts/seed-faq.mjs",
     "seed:content": "node scripts/seed-content.mjs",
-    "purge:dummy-documents": "node scripts/purge-dummy-documents.mjs"
+    "purge:dummy-documents": "node scripts/purge-dummy-documents.mjs",
+    "verify:links": "node scripts/verify-all-links.mjs",
+    "smoke:production": "node scripts/smoke-production.mjs https://officemitra.vercel.app"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",

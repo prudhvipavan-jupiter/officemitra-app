@@ -35,35 +35,55 @@ export default async function DocumentsPage() {
           </div>
         ) : (
           <ul className="mt-10 space-y-3">
-            {docs.map((d) => (
-              <li key={d.id} className="card flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p className="font-semibold text-navy-900">{d.title}</p>
+            {docs.map((d) => {
+              const goNumber = d.data.go_number ? String(d.data.go_number) : null;
+              const dated = d.data.dated ? String(d.data.dated) : null;
+              return (
+              <li key={d.id} className="card flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="badge bg-navy-50 text-navy-700">{d.category}</span>
+                    {goNumber && (
+                      <span className="badge bg-gold-100 text-gold-800">{goNumber}</span>
+                    )}
+                  </div>
+                  <Link href={`/documents/${d.slug}`} className="mt-2 block font-semibold text-navy-900 hover:text-gold-600">
+                    {d.title}
+                  </Link>
                   <p className="mt-1 text-sm text-gray-600">{d.summary}</p>
+                  {dated && (
+                    <p className="mt-1 text-xs text-gray-500">Dated: {dated}</p>
+                  )}
                 </div>
-                {d.data.file ? (
-                  <a
-                    href={String(d.data.file)}
-                    className="btn-secondary shrink-0 text-sm"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Download className="h-4 w-4" />
-                    Download
-                  </a>
-                ) : d.data.external_url ? (
-                  <a
-                    href={String(d.data.external_url)}
-                    className="btn-secondary shrink-0 text-sm"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Download className="h-4 w-4" />
-                    View on GOIR
-                  </a>
-                ) : null}
+                <div className="flex shrink-0 flex-wrap gap-2">
+                  <Link href={`/documents/${d.slug}`} className="btn-secondary shrink-0 text-sm">
+                    View details
+                  </Link>
+                  {d.data.file ? (
+                    <a
+                      href={String(d.data.file)}
+                      className="btn-secondary shrink-0 text-sm"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Download className="h-4 w-4" />
+                      Download
+                    </a>
+                  ) : d.data.external_url ? (
+                    <a
+                      href={String(d.data.external_url)}
+                      className="btn-secondary shrink-0 text-sm"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Download className="h-4 w-4" />
+                      Official source
+                    </a>
+                  ) : null}
+                </div>
               </li>
-            ))}
+              );
+            })}
           </ul>
         )}
       </div>
