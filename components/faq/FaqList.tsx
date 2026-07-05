@@ -3,11 +3,16 @@
 import { useMemo, useState } from "react";
 import { HelpCircle, Search } from "lucide-react";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { DisclaimerNotice } from "@/components/ui/DisclaimerNotice";
+import { VerifiedBadge } from "@/components/ui/VerifiedBadge";
 import { FAQ_CATEGORY_LABELS } from "@/lib/site-data";
 
-type FaqItem = { id: string; title: string; body: string | null; category: string };
+type FaqItem = {
+  id: string;
+  title: string;
+  body: string | null;
+  category: string;
+  data?: Record<string, unknown>;
+};
 
 export function FaqList({ items }: { items: FaqItem[] }) {
   const [query, setQuery] = useState("");
@@ -73,7 +78,10 @@ export function FaqList({ items }: { items: FaqItem[] }) {
         <dl className="mt-8 space-y-3">
           {filtered.map((item) => (
             <div key={item.id} className="card">
-              <span className="badge bg-navy-50 text-navy-700">{FAQ_CATEGORY_LABELS[item.category] ?? item.category}</span>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="badge bg-navy-50 text-navy-700">{FAQ_CATEGORY_LABELS[item.category] ?? item.category}</span>
+                {Boolean(item.data?.verified) && <VerifiedBadge />}
+              </div>
               <dt className="mt-2 font-semibold text-navy-900">{item.title}</dt>
               <dd className="mt-2 leading-relaxed text-gray-700">{item.body}</dd>
             </div>

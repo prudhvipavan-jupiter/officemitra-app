@@ -7,6 +7,8 @@ import {
   type ContactRequestStatus,
   type ContactRequestType,
 } from "@/lib/contact/store";
+import { notifyAdminNewContact, sendContactConfirmation } from "@/lib/email/send";
+import { checkRateLimit, isValidEmail, sanitizeText } from "@/lib/security";
 
 export async function GET(req: NextRequest) {
   if (!(await isAdmin())) {
@@ -18,22 +20,24 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  const limited = await checkRateLimit(req, "contact", 5, 15);
+  if (!limited.ok) {
+    return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
+  }
+
   const body = await req.json();
-  const name = String(body.name ?? "").trim();
-  const email = String(body.email ?? "").trim();
-  const department = String(body.department ?? "").trim();
-  const subject = String(body.subject ?? "").trim();
-  const message = String(body.message ?? "").trim();
+  const name = sanitizeText(String(body.name ?? ""), 120);
+  const email = sanitizeText(String(body.email ?? ""), 254);
+  const department = sanitizeText(String(body.department ?? ""), 200);
+  const subject = sanitizeText(String(body.subject ?? ""), 200);
+  const message = sanitizeText(String(body.message ?? ""), 5000);
   const request_type = (body.request_type ?? "general") as ContactRequestType;
 
   if (!name || !email || !subject || !message) {
     return NextResponse.json({ error: "All required fields must be filled" }, { status: 400 });
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!isValidEmail(email)) {
     return NextResponse.json({ error: "Enter a valid email address" }, { status: 400 });
-  }
-  if (message.length > 5000) {
-    return NextResponse.json({ error: "Message is too long" }, { status: 400 });
   }
 
   const item = await createContactRequest({
@@ -44,6 +48,11 @@ export async function POST(req: NextRequest) {
     message,
     request_type: ["expert", "feedback", "general"].includes(request_type) ? request_type : "general",
   });
+
+  await Promise.all([
+    notifyAdminNewContact({ name, email, subject, request_type: item.request_type }),
+    sendContactConfirmation({ name, email, subject }),
+  ]);
 
   return NextResponse.json({ ok: true, item });
 }

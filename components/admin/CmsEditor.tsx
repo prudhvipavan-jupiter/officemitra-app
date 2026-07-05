@@ -110,6 +110,21 @@ export function CmsEditor({ type }: { type: ContentType }) {
               <option value="draft">Draft</option>
               <option value="published">Published</option>
             </select>
+            {(type === "article" || type === "faq" || type === "update") && (
+              <label className="mt-3 flex items-center gap-2 text-sm text-gray-700">
+                <input
+                  type="checkbox"
+                  checked={Boolean(editing.data?.verified)}
+                  onChange={(e) =>
+                    setEditing({
+                      ...editing,
+                      data: { ...(editing.data ?? {}), verified: e.target.checked },
+                    })
+                  }
+                />
+                Mark as verified guidance (shows verified badge on site)
+              </label>
+            )}
             <div className="mt-4 flex gap-2">
               <button type="button" className="btn-primary" onClick={save}>Save</button>
               <button type="button" className="btn-secondary" onClick={() => setEditing(null)}>Cancel</button>

@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { FileText } from "lucide-react";
 import type { ToolDefinition } from "@/lib/data/types";
 import { GO_LAST_VERIFIED } from "@/lib/site-config";
+import { VerifiedBadge } from "@/components/ui/VerifiedBadge";
 import { calculators } from "@/lib/tool-engine";
 
 function CalculatorTool({ tool }: { tool: ToolDefinition }) {
@@ -64,8 +65,11 @@ export function ToolRenderer({ tool }: { tool: ToolDefinition }) {
     <>
       <div className="mb-6 flex gap-3 rounded-xl border border-gold-200 bg-gold-50 px-4 py-3 text-sm text-gray-800">
         <FileText className="mt-0.5 h-4 w-4 shrink-0 text-gold-700" />
-        <div>
-          <p className="font-semibold text-navy-900">AP Government Order basis</p>
+        <div className="flex-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="font-semibold text-navy-900">AP Government Order basis</p>
+            <VerifiedBadge label="G.O. verified" />
+          </div>
           <p className="mt-1">{tool.goReference}</p>
           {tool.goNote && <p className="mt-1 text-gray-600">{tool.goNote}</p>}
           <p className="mt-2 text-xs text-gray-500">Rates last verified: {GO_LAST_VERIFIED}. Confirm on GOIR before action.</p>

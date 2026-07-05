@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export function Footer({ logoUrl }: { logoUrl?: string | null }) {
+export function Footer({ logoUrl, visitorCount }: { logoUrl?: string | null; visitorCount?: number | null }) {
   const pathname = usePathname();
   if (pathname.startsWith("/admin")) return null;
 
@@ -60,6 +60,9 @@ export function Footer({ logoUrl }: { logoUrl?: string | null }) {
         </div>
         <p className="mt-6 text-xs text-navy-400">
           © {new Date().getFullYear()} OfficeMitra. Andhra Pradesh, India.
+          {visitorCount != null && visitorCount > 0 && (
+            <span className="ml-2">· {visitorCount.toLocaleString("en-IN")} page views</span>
+          )}
         </p>
       </div>
     </footer>

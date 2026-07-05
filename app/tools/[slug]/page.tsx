@@ -5,6 +5,7 @@ import Link from "next/link";
 import { use } from "react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { DisclaimerNotice } from "@/components/ui/DisclaimerNotice";
+import { WhatsAppShare } from "@/components/ui/WhatsAppShare";
 import { ToolRenderer } from "@/components/tools/ToolRenderer";
 import { getToolBySlug, TOOL_CATEGORY_LABELS } from "@/lib/site-data";
 
@@ -28,6 +29,9 @@ export default function ToolPage({ params }: { params: Promise<{ slug: string }>
       <div className="page-body-narrow !max-w-2xl">
         <div className="card">
           <ToolRenderer tool={tool} />
+        </div>
+        <div className="mt-4">
+          <WhatsAppShare title={tool.title} path={`/tools/${slug}`} />
         </div>
         <DisclaimerNotice compact />
         <p className="mt-4 text-xs text-gray-500">

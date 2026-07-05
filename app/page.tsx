@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { ArrowRight, BookOpen, Calculator, ExternalLink, HelpCircle, Shield, Sparkles } from "lucide-react";
+import { HomeLatest } from "@/components/home/HomeLatest";
 import { HomeSearch } from "@/components/HomeSearch";
 import { WebSiteJsonLd } from "@/components/seo/WebSiteJsonLd";
-import { platformModules, secondaryModules } from "@/lib/modules";
+import { getVisiblePlatformModules, secondaryModules } from "@/lib/modules-visible";
+import { getSiteSettings } from "@/lib/site/settings-store";
 import { getPublicSiteStats } from "@/lib/site-stats";
 
 export default async function HomePage() {
-  const stats = await getPublicSiteStats();
+  const [stats, settings] = await Promise.all([getPublicSiteStats(), getSiteSettings()]);
+  const platformModules = getVisiblePlatformModules(settings);
 
   return (
     <>
@@ -65,6 +68,8 @@ export default async function HomePage() {
           ))}
         </div>
       </section>
+
+      <HomeLatest />
 
       <section className="page-body">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">

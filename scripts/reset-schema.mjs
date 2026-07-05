@@ -80,16 +80,6 @@ await sql`
   )
 `;
 await sql`
-  CREATE TABLE IF NOT EXISTS site_files (
-    id TEXT PRIMARY KEY,
-    kind TEXT NOT NULL DEFAULT 'logo',
-    filename TEXT NOT NULL,
-    mime_type TEXT NOT NULL,
-    data BYTEA NOT NULL,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-  )
-`;
-await sql`
   CREATE TABLE IF NOT EXISTS contact_requests (
     id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
@@ -100,6 +90,39 @@ await sql`
     request_type TEXT NOT NULL DEFAULT 'general',
     status TEXT NOT NULL DEFAULT 'new',
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )
+`;
+await sql`
+  CREATE TABLE IF NOT EXISTS site_files (
+    id TEXT PRIMARY KEY,
+    kind TEXT NOT NULL DEFAULT 'logo',
+    filename TEXT NOT NULL,
+    mime_type TEXT NOT NULL,
+    data BYTEA NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )
+`;
+await sql`
+  CREATE TABLE IF NOT EXISTS site_settings (
+    key TEXT PRIMARY KEY,
+    value JSONB NOT NULL DEFAULT '{}',
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )
+`;
+await sql`
+  CREATE TABLE IF NOT EXISTS page_views (
+    id TEXT PRIMARY KEY,
+    path TEXT NOT NULL,
+    session_hash TEXT NOT NULL,
+    referrer TEXT NOT NULL DEFAULT '',
+    viewed_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )
+`;
+await sql`
+  CREATE TABLE IF NOT EXISTS rate_limits (
+    id TEXT PRIMARY KEY,
+    hits INT NOT NULL DEFAULT 1,
+    window_start TIMESTAMPTZ NOT NULL DEFAULT NOW()
   )
 `;
 console.log("Fresh schema ready.");

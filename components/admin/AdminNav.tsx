@@ -11,6 +11,7 @@ const links = [
   { href: "/admin/faq", label: "FAQ" },
   { href: "/admin/community", label: "Community" },
   { href: "/admin/contact", label: "Contact" },
+  { href: "/admin/analytics", label: "Analytics" },
   { href: "/admin/settings", label: "Settings" },
 ];
 

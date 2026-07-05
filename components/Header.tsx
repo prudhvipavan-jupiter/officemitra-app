@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Menu, Search, X } from "lucide-react";
 import { useState } from "react";
 
-const nav = [
+const baseNav = [
   { href: "/knowledge", label: "Knowledge" },
   { href: "/documents", label: "Documents" },
   { href: "/updates", label: "Updates" },
@@ -15,10 +15,24 @@ const nav = [
   { href: "/portals", label: "Portals" },
 ];
 
-export function Header({ logoUrl }: { logoUrl?: string | null }) {
+export function Header({
+  logoUrl,
+  showProcessTemplates = false,
+}: {
+  logoUrl?: string | null;
+  showProcessTemplates?: boolean;
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   if (pathname.startsWith("/admin")) return null;
+
+  const nav = showProcessTemplates
+    ? [
+        ...baseNav.slice(0, 3),
+        { href: "/process-templates", label: "Process" },
+        ...baseNav.slice(3),
+      ]
+    : baseNav;
 
   return (
     <header className="sticky top-0 z-50 border-b border-navy-800/80 bg-navy-900 text-white shadow-lg">

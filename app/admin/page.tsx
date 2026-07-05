@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import {
+  BarChart3,
   Bell,
   BookOpen,
   FolderOpen,
@@ -75,6 +76,14 @@ export default async function AdminPage() {
       published: null,
       hint: newContacts ? `${newContacts} new message${newContacts > 1 ? "s" : ""}` : "Expert & general enquiries",
       alert: newContacts > 0,
+    },
+    {
+      href: "/admin/analytics",
+      label: "Analytics",
+      icon: BarChart3,
+      total: null,
+      published: null,
+      hint: "Page views and visitor stats",
     },
     {
       href: "/admin/settings",

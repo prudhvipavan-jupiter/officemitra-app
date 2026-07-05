@@ -1,18 +1,20 @@
 import { redirect } from "next/navigation";
 import { LogoSettings } from "@/components/admin/LogoSettings";
+import { ModuleSettings } from "@/components/admin/ModuleSettings";
 import { isAdmin } from "@/lib/auth";
 import { CONTACT_EMAIL, SITE_URL } from "@/lib/site-config";
+import { getSiteSettings } from "@/lib/site/settings-store";
 import { getSiteLogo } from "@/lib/site/store";
 
 export default async function AdminSettingsPage() {
   if (!(await isAdmin())) redirect("/admin/login");
 
-  const logo = await getSiteLogo();
+  const [logo, settings] = await Promise.all([getSiteLogo(), getSiteSettings()]);
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
       <h1 className="text-2xl font-bold text-navy-900">Site settings</h1>
-      <p className="mt-1 text-gray-600">Branding and site information.</p>
+      <p className="mt-1 text-gray-600">Branding, module visibility, and site information.</p>
 
       <div className="mt-8 space-y-6">
         <LogoSettings
@@ -20,6 +22,8 @@ export default async function AdminSettingsPage() {
             logo ? { url: logo.url, filename: logo.filename, mime_type: logo.mime_type } : null
           }
         />
+
+        <ModuleSettings initial={settings} />
 
         <div className="card">
           <h2 className="text-lg font-semibold text-navy-900">Site information</h2>
